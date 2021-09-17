@@ -1,0 +1,213 @@
+Map reduce
+
+Programming Paradigm
+
+What is main purpose of map reduce?
+
+to process the huge data.
+Two operation are there of mapreduce
+
+mapper 				sort&Sheuffle		reduce
+
+
+				user
+
+mapper - input key value    output:-key value
+
+sort& suffle- input key value(output of the mapper)   output (key ,List of value)
+
+Reducer-- input -as output of sort and suffle  output -(keyValue)
+==============================================
+Map reduce Practical:-
+Firsr we create the mapper input 
+vi mapperinput
+
+and inside the mapperinput we write some text as we take this file is as Input
+
+Now open the eclipse
+
+and we create the new java project 
+file-new-javaproject
+we give the projectname wordcount and we click on the next we see wordcount 
+folder and under wordcount folder a subfolder is presesnt with src.
+we click on finish.
+=============================================================
+Java classes Creation
+===================================================================
+Now from src subfolder we create the java files
+so right click on the src folder we get a menu and that we have a option New
+under that we go with option "class"
+
+Under that we give 
+Name:- WordCount
+
+as we give the name click on the finish we that under src default packages
+and WordCount.java file created.
+copy the code of word count into these file.
+
+=============================================================
+Hadooop Datatypes
+
+int -------->Intwritables
+float-------> Floatwritable
+String------>Text
+
+==================================================================
+How can we add the jars to the existing Projects
+So right click on the parent folder that is project folder and from the menu select the option Build PATH
+and under Build Path we have to use Configure Build Path
+
+Build Path----Configure Build Path
+when we Click on the Configure Build Path a new windows open under that we select ADD Externals Jars
+buildpath--Configure Build Path -----Add External Jars
+hadoop giving the three KINDS Of the External Jars these are
+hadoop-ant-0.20.2
+hadoop-core
+hadoop example
+we select these three and added and click on Ok
+When we add the jars all the error should gone.
+==================================================
+ 
+ We take a class wc(word count under these class we write mapperex class and reduce classand 
+ mapperEx class must extends the mapper class means mapperex name can be change it is not fixed
+but we can change the name of the Child Class 
+---------------------------------------------------------------
+class wc{
+class mapperEx extends Mapper<ip key,ipvalue,opkey,opvalue>{
+//method
+	map(key,object,value Text,Context context)
+{
+//mapper Logic
+}
+}
+class reducerEx extends Reducer{
+reduce()
+}
+psvm()
+{
+		
+}
+}
+What is Context?
+Context is
+
+==================================================================
+How to create the jar file?
+Select the project folder right click on it
+Select output option 
+select jar files
+give the external location where it is saved
+
+Now we export thes jar file to hadoop system
+1.First we create the folder inside the hadoop environment
+hadoop fs -mkdir Mr
+
+2.We see all the java processor are working or not by jps commands
+jps
+
+3.In Linux we create the Directory 
+mkdir Mr
+cd MR
+==========================================================
+4.How can we create the sharefolder from the host and guest folder
+For this we have to create the sharable folder for this we go vm then setting
+Vm-Settings
+Under Options Enable the shared folder
+under the location which folder we want to share we give path
+Now under the Windows we create the folder and paste the files in this 
+this folder itself visible inside the virtual operating system
+ 
+Hence by setting sharefolder we see all in the file in that folderr which we want to share 
+with the virtual operating system
+===========================================================
+Now we want to acces that share folder in the Linux 
+cd /mnt/hgfs
+ls
+we get the jar we reated in the Windows 
+pwd
+Now we copy this jar to directory we make in Linux
+cp /mnt/hgfs/hadoop\  durgasoft/WordCount.jar /home/user/MR
+Now we have word Count JAR in that linux Folder.
+ls
+vi input.txt
+in that we write the text this file we take it as input and save it 
+Now we want to see the Content of this file by this commands
+cat input.txt
+Now we want to tranfer this input file into the Hadoop environment
+hadoop fs -ls /
+hadoop fs -mkdir /mrEx1
+hadoop fs -ls
+we get this folder in the List mrEx1 
+--------------------------------------------
+Lecture Part5
+Now we want to see content of this 
+hadoop fs -cat ip.txt
+Now we execute the jar file
+hadoop jar wordCount.jar WordCount(Driver Name)
+
+Driver class is the name of the class which is under which all the map reduce aclass written 
+hadoop jar wordCount.jar WordCount /MRE X1/ip.txt  /MREX1OP
+
+Driver name means the class name under which all map reduce and main logic are wriiten
+/MRE X1/IP.TXT --INPUT FILE NAME
+/MREX1OP--oUTPUT FILES WE ARE GENEARTING
+
+
+OUTPUT OF THE MAPPER IS LIKE PART-M-0001
+OUTPUT OF REDUCE IS lIKE PART-R-0001
+When reducer have to execute then map-r generate and then convert to map-r
+
+Max reducer file is ---part-r-99999
+but any number of mapper we can execute.
+
+Run the output folder
+hadoop fs -ls /MREX1OP
+We see the output in the form part-r--001 and --succes files these file are generated by the 
+hadoop
+.Now we can open file 
+
+hadoop fs -cat MREX1OP/PART-0001
+
+WE SEE OUTPUT WHICH WORD IS REPEATED WHAT NUMBER OF TIMES
+----------------------------------------------------------------------
+Word Per Lines Program
+same steps we do
+-----------------------------------------------------------------------------
+Lecture 11 part6
+Partitioner 
+if age<18  rducer 1
+if age<50 and >18 -->reducer2		
+>50--Reducer3
+
+
+job.setNumReduceTask(3);
+Here we set three Reducer
+We can increase or decrese the reducer class but not mapper class
+
+Driver class Name --SamplePartitioner 
+mapper class name --PartitionMapper
+Reducer class name ---reducer paruitioner
+age partition we write between 
+
+
+--------------------------------------------
+1.Compression Logic
+If we want to see compression file as text we use the this commands
+hadoop fs -text /MRCOMPOP/part-0000.gz
+Minimum number of atom is atom
+
+
+To see the status of Hadoop admin there is commands
+hadoop dfsadmin -report
+
+To see the number of block asigned for this file
+hadoop fsck -block /hdfsFolder1/second.txt
+In haddop 2 we do not need to give the block attributes
+hadoop fsck /hdfsFolder1/second.txt
+
+To see the content
+hadoop fs -cat /hdfsFolder1/second.txt
+
+ 
+ 
+

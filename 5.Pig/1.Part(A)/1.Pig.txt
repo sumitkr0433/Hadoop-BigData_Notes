@@ -1,0 +1,417 @@
+Q1-What is Pig?
+Pig is a High-level procedural lanagugae for querying large semi-structured data sets using Hadoop and the Map Reduce Platform.
+Pig simplifies the use of Hadoop SQL-like queries to a distributed system.
+Pig Latin scripts describes a directed acyclic graph (DAG),where the edges are data flows and the nodes are operators that process the date.
+#############################################################################################################################################################
+Advantage:-Pig Latin 
+Pig Latin provides all of the standard data processing opeartions such as joins,filter,group by order by,union etc.
+#############################################################################################################################################################
+In Pig Latin joins and ordering codecs of 8-9 lines of code and take few minutes to write and debug.To same code in Map reduce will span hundred 
+Line of code and take hours to develop.
+============================================================================================================================================================
+Q2.What are the datatypes supported by Pig?
+Complex Data type
+Atom:- any single value in Pig Latin,irrespective of their data,type is known as Atom.
+It is stores as bytes array by default and can be used as string or number like int long,float,double,chararray and bytesarray are the atomic values of Pig.
+A piece of data or a simple atomic value is known as a field.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Tuple:-A record that is formed by an ordered set of filed is known as a tuple the dield can by any type.
+A tuple is similar to row in a table of rdbms.
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Bag:-A bag ois an unordered set of tuples.
+In other words ,a collection of tuples(non unique)is known as a bag.Each tuple can have any number of fields
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+A bag is represented by'{}' it is similar to a table in rdbms but unlike a table in RDBMS,IT IS NOT necessay that every tuple contain the same number if fields in
+the same position(column)have the same type
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Map:- A map ( or data map)is a set of key value pairs the key needs to be of type chararray and should be unique.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q1.What is DAG?
+Direct acyclic graph it just decide how a particular job will execute Suppose we desing a particular job
+================================================================================================================================================================
+Pig is the major componenent in the hadoop ecosystem it is meant for processing huge amount of data without using the map reduce paradigm.
+Pig use better performance than map reduce program
+Pig does not use the java program 
+Pig uses pig Latin
+Apche Pig is meant for processing it does bother for storage.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+It is the collection of Built commands or built in operator internally called transformation Here we called this transformation as Data flow Tranformation.
+Pig has much better performance than MAP Reduce Program.We also called Data flow Transformation.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+To learn Pig we have to learn about execution mode 
+MapReduce Mode
+Local Mode
+===============================================================================================================================================================
+If we fetching data from the local file system and we performing in Pig script to fetch 
+data we have to check Local Mode.
+When we have to work in Localmode we use 
+
+pig -x Local
+for map reduce mode we use the script called Pig
+terminal>pig
+termnal>pig version
+=================================================================================================================================================================
+There are two mode of intercative
+1.interactive 
+2.Script mode.pig
+3.Embeded Mode:-On the top of this builtin function 
+=================================================================================================================================================================
+Basic Transformation of the Pig
+terminal>vi hello.txt
+enter some data in it and save the file
+Now we see the content of the 
+terminal>cat hello.txt
+For working in the local environment we give the commands
+terminal>pig -x local
+When we give this commands grunt prompt open
+grunt>
+===============================================================================================================================================================
+If we want to perform the 
+vi input.txt 
+name:marks
+abc:65
+xys:85
+mnp:89
+asd:45
+===============================================================================================================================================================
+to see the content 
+cat pigip.txt
+Now we want only marks 
+first we load the text by specifyin
+===============================================================================================================================================================
+grunt>A=load 'pigip.txt' using PigStorage(':');
+if we want to print a 
+grunt>DUMP A
+===============================================================================================================================================================  
+TO STORE THE partial content of A Here we are generating the second column only
+grunt>B =FOREACH A GENERATE $1;
+grunt> DUMP B 
+grunt>B =FOREACH A GENERATE $0,$1;
+grunt>DUMP B
+grunt>exit
+###############################################################################################################################################################
+Now we added one more column  
+vi pigip.txt
+name:marks:gender
+abc:65:M
+xyz:85:F
+mnp:89:M
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Now again we want to load
+grunt>A=LOAD 'pipip.txt'
+grunt>B=FOREACH A GENERATE $0,$2;
+grunt> DUMP B 
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q.What is the use of DUMP ?
+dUMP IS USED TO PRINT THE DATA
+IF WE WANT TO COPY DATA OF B INTO ANOTHER FILE PIPop.txt
+grunt>A=LOAD 'pigip.txt' using PigStorage(':');
+grunt>B= FOREACH A GENERATE $0,$2;
+grunt>STORE B INTO 'pigop';
+Here pigop folder get created and inside this only mapper available
+ls
+cat part-m-0000
+Here we get the data in the another folder.
+Here we have done all the practical on the 
+---------------------------------------------------------------------------------
+Samethings we want to achieve with hadoop filesystem
+terminal>hadoop fs -mkdir pigip
+terminal>hadoop fs -mkdir /pigip
+terminal>hadoop fs -put pigip.txt /pigop
+=========================================================================
+Part2
+hadoop fs -cat /pigip/pigip.txt
+name:marks:Gender
+abc:65:M
+XYZ:85:F
+mnp:89:M
+ASD:45:F
+Now we enter into the grunt
+grunt>A=LOAD '/pigip/poigip.txt' using PigStorage(':');
+grunt>B=FOREACH A GENERATE $0,$1;
+grunt>STORE B INTO '/pigop1';
+exit
+terminal>hadoop fs -ls /pigop
+terminal>hadoop fs -cat /pigop1/part-m-0000
+Retrive 
+terminal>pig
+grunt>A=LOAD '/pigip/poigip.txt' using PigStoraGE(':');
+WE GET THE THE LIST
+(NAME,MARKS,GENDER)
+() 
+()
+()
+grunt>A=laod '/pigip/pigip.txt' using PigsTORAGE(':');
+grunt>A =LOAD '/pigip/pigip.txt' using PigStorage(':') as (name:chararray,marks:int,gender:chararray);
+FILTER
+GRUNT>B=FILTER A by gender =='M':
+Only male candidate we see
+grunt>DUMP B;
+if we want to get the result on the sorted 
+
+grunt>B=ORDER A by name;
+grunt>C=FILTER A by Gender=='F';
+grunt>DUMP C;
+
+Filter B
+grunt>A =LOAD '/pigip/pigip.txt' using PigStorage(':') as (name:chararray,marks:int,gender:chararray);
+grunt>B =ORDER A BY name;
+grunt>C=FILTER B BY GENDER 'F'
+grunt>DUMP C;
+=================================================================================================================================================================
+IF WE WANT CREATE THE MULTIRECORD WITH RESPECT TO GENDER
+grunt>A =LOAD '/pigip/pigip.txt' using PigStorage(':') as (name:chararray,marks:int,gender:chararray);
+grunt>SPLIT A INTO X IF gender =='M',Y IF GENDER =='F';
+grunt>STORE X INTO /pigopM,STORE Y INTO '/pigopf'
+grunt>exit;
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Now we want to check the data 
+terminal>hadoop fs -ls '/pigopM';
+termnal>hadoop fs -cat /pigopM/aprt-m-0000;
+termnal>hadoop fs -cat /pigopF/aprt-F-0000;
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+we add some duplicate data
+terminal>nano pigip.txt
+name:marks:gender
+abc:65:M
+xyz:85:F
+mnp:89:M
+mnp:89:M
+asd:45:F
+abc:65:M
+abc:65:M
+================================================================================================================================================================
+terminal>nano pigip.txt
+Showing the data 
+terminala>cat pigip.txt
+name:marks:Gender
+abc:65:M
+xyz:85:F
+mnp:89:M
+=================================================================================================================================================================
+nowe we open the local environement of pig environemnt
+terminal>pig -x local
+grunt>A =LOAD 'pigip.txt' using PigStorage(':') as (name:chararray,marks:int,gender:chararray);
+==================================================================================================================================================================
+if we want to check only four ROW then we use distict keywords
+grunt>B=LIMIT A 4;
+grunt>Dump B;
+WE ARE GETTING THE TOP FOUR ROW
+(NAME,GENDER)
+=================================================================================================================================================================
+If we want to remove the duplication then in the map reduce it is diificult but in this it is distict
+grunt>A =LOAD 'pigip.txt' using PigStorage(':') as (name:chararray,marks:int,gender:chararr
+grunt>B=DISTINCT A;
+GRUNT>DUMP B;
+=================================================================================================================================================================
+Complex Commands:-
+if we want to calculate the all male cadidate
+grunt>A =LOAD 'pigip.txt' using PigStorage(':') as (name:chararray,marks:int,gender:chararr
+grunt>B=DISTINCT A;
+GROUP BY
+grunt>B =DISTINCT A;
+grunt>GROUP B by gender;
+grunt>DUMP B;
+###############################################################################################################################################################
+SUMMATION OF THESE TWO INDIVIDUAL MARKS
+grunt>A =LOAD 'pigip.txt' using PigStorage(':') as (name:chararray,marks:int,gender:chararray);
+grunt>B =Distinct=A;
+grunt>C =GROUP B by gender;
+grunt>FOREACH B GENERATE group,Sum(marks);
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+22Lecture:3--
+grunt>A =LOAD 'pigip.txt' using PigStorage(':') as (name:chararray,marks:int,gender:chararray,marks:int,gender:chararr
+grunt>B= DISTINCT A;
+grunt>C =GROUP B by gender;
+grunt>D= FOREACH C GENERATE group,SUM(B.marks);
+grunt>Dump D;
+(F, 130)
+(M,154) 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Important of Cogroup
+Cogroup
+How can we create the single script
+terminal>nano scripts1.pig
+and we paste all the Things in it
+-----------------------------------------------------
+Script1.pig
+A =LOAD 'pigip.txt' using PigStorage(':') as (name:chararray,marks:int,gender:chararray,marks:int,gender:chararr
+B= DISTINCT A;
+C =GROUP B by gender;
+D= FOREACH C GENERATE group,SUM(B.marks);
+Dump D;
+
+Here we write execute the things in the scripting mode
+terminal>pip -x local script1.pig
+-----------------------------------------------------------------------
+Now if want to script in the hdfs first we have to copy
+terminal>hadoop fs -put script1.pig /pigip
+terminal>hadoop fs -cat /pigip/script1.pig
+we see the content 
+In hdfs we donot need to use hdfs 
+terminal>pip script1.pig
+we get null because we give in local location under load
+so we have to change that 
+
+nano script1.pig
+A =LOAD 'pigip/pigip.txt' using PigStorage(':') as (name:chararray,marks:int,gender:chararray,marks:int,gender:chararr
+exit from the nano editior
+
+now we see content of script1.pig
+terminal>cat script1.pig
+
+Now we remove the script1.pig
+terminal>hadoop fs -rm /pigip/script1.pig
+
+
+terminal>hadoop fs -put script1.jpg /pigip
+
+Now we try to read Now
+terminal>hadoop fs -cat /pigip/script1.pig
+
+Now we execute this script in hdfs mode map reduce 
+terminal>pig script1.pig
+
+--------------------------------------------------------------
+Suppose we have data in multiple point
+here we have 
+terminal>cat pigip.txt
+abc:65:M
+xyz:85:F
+mnp:89:M
+asd:45:F
+abc:65:M
+ABC:65:M
+
+terminal>nano pigip2.txt;
+
+abc 	India	
+mnp		USA	
+xyz		UK
+
+IF WE WANT TO ADD COMBINE WANT FOUR ATTRIBUTE
+terminal>pig -x local
+First we have to load the data
+grunt>A =LOAD 'pigip/pigip.txt' using PigStorage(':') as (name:chararray,marks:int,gender:chararray);
+
+grunt>Load b =LOAD 'pigip/pigip2.txt' using PigStorage('\t') as (name:chararray,marks:int,gender:chararray,loc:chararray);
+
+grunt>C =Group B by gender;
+
+its time to perform the join
+sj-simple join
+grunt>SJ= join A by name,B by name;
+grunt>DUMP SJ
+OUTPUT:- 
+(abc,65,M,abc,India)
+(abc,65,M,abc,India)
+()
+
+============================================================================
+Left Outer Join
+grunt>LJ= JOIN A by NAME LEFT,B by name;
+grunt>Dump LJ;
+(ABC,65,M,ABC,India)
+(abc,65,M,abc,India)
+(abc,65,M,abc,India)
+(asd,45,F,,)
+(mnp,89,M,mnp,USA)
+(mnp,89,M,mnp,USA)
+(XYZ,85,F,xyz,UK)
+
+grunt>RJ= JOIN A by NAME LEFT,B by name;
+grunt>Dump RJ;
+GRUNT>quit();
+-------------------------------------------------------------------------
+terminal>nano pigip2.txt
+editior open
+abc India 
+mnp	USA
+xyz	UK
+pqr	AU
+terminal>cat pigip2.txt
+abc India
+mnp	USA
+xyz	UK
+pqr	AU
+
+terminal>pig -x local
+grunt>A =LOAD 'pigip/pigip.txt' using PigStorage(':') as (name:chararray,
+ 
+grunt>B =LOAD 'pigip/pigip.txt' using PigStorage(':') as (name:chararray,
+grunt>SJ =JOIN A by name,B by name;
+grunt>RJ =JOIN A BY NAME right b by name;
+
+=====================================
+Full outer join
+grunt>FJ =JOIN A BY name FULL,B by name;
+grunt>Dump FJ;
+
+============================================================
+Suppose 
+Suppose we want to make a normal token
+grunt>A= Load 'pigip.txt' using PigStorage(':') as (name:chararray,marks:int,gender:chararray);
+grunt>DUMP A;
+(ABC,65,M)
+(XYZ,85,F)
+(MNP,89,M)
+(mnp,89,M)
+(asd,45,F)
+(abc,65,M)
+
+Now want to make it as Normal token or divide into number of token
+
+grunt>A= Load 'pigip.txt' using PigStorage(':') as (name:chararray,marks:int,gender:chararray);
+grunt>B= FOREACH A GENERATE TOKENIZE(name);
+grunt>DUMP B;
+({(abc)})
+({(xyz)})
+({(mnp)})
+({(asd)})
+({(abc)})
+
+take entire line as single line
+grunt>A= Load 'pigip.txt' using PigStorage('\n') as (line:chararray,);
+grunt>B= FOREACH A GENERATE TOKENIZE(Line);
+({(abc:65:M)})
+({(xyz:85:F)})
+({(mnp:89:M)})
+({(asd:45:F)})
+({(abc)})
+
+
+==================================================
+grunt>A= Load 'pigip.txt' using PigStorage('\n') as (NAME:chararray,marks:int,gender:chararray);
+grunt>B= group A by gender;
+grunt>DUMB B;
+(F,{(XYZ,85,F),(asd,45,F)})
+(M,{(ABC,65,M),(mnp,89,M),(abc,65,M),(abc,65,M)})
+Nested format we get
+=====================================================
+If we want to remove 
+grunt>A= Load 'pigip.txt' using PigStorage('\n') as (NAME:chararray,marks:int,gender:chararray);
+grunt>B= group A by gender;
+grunt>C= FOREACH B GENERATE FLATTEN(A);
+(xyz,85,F)
+(asd,45,F)
+(abc,65,M)
+(mnp,89,M)
+(abc,65,M)
+(
+we get the data without data 
+------------------------------------
+grunt>DESCRIBE A;
+A: {name :chararray,marks:int,gender:chararray}
+B:{group:chararray,A:{(name:chararray,,arks:int,gender: chararray)}}
+Here we get the schema of any variable
+-------------------------------------------------
+Entire procdure of the group we use 
+Illustarte
+grunt>ILLUSTRATE B;
+==============================================================
+explain opearator 
+grunt>EXPLAIN B;
+IT GIVE HIGH LEVEL DESIGN OF MAP REDUCE
+
+
+Q.What is major Diagonistic operator?

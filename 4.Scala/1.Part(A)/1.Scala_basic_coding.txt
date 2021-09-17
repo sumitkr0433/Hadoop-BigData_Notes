@@ -1,0 +1,329 @@
+Q1.What is scala?
+scala is functional & object oriented 
+started 2001 by Martin Odesskey 2004 the first version was release on javm machine
+Further it is released with dot net framework We can develop web application mobile gaming
+Statically typed Language:-
+===========================================================================================================================================
+Q:-Define the statically typed in terms of scala?
+x=10
+x="xyz"
+##########################################################################################################################################
+Q:-->What ever we declare in the intial phase we can change the value
+only in that form if we tring to store the string it raise error but 
+=======================================================================================================================================
+x =11
+x=12
+this does not give error
+this raise error
+-----------------------------------------------------------------------------------------------------------------------------------------
+Java form supoose we have to decalre the list of string
+JAVA
+List<string> 
+l1=new ArrayList<string>();
+l1.add("abc")
+l1.add("bbc')
+==========================================================================================================================================
+It is easy in scala 
+l1=List("abc","bbc")
+##########################################################################################################################################
+SCALA is easy to write Spark storm,akka,Play,scalding these are built on the hadoop these are using scala
+strom--data analytics
+akka --general purpose tool
+Play --web frame work
+scalding---mrjobs
+==============================================================================================================================================
+Installing scala on hadoop cluster after we installing
+terminal>scala
+we use by typing scala in the terminal to enter in scala inteactive shell scala is major purposes tool
+===============================================================================================================================================
+scala>
+datatype a =10
+BUT SCALA DOES INCLUDE THE DATATYPE
+scala>X=10
+SCALA UNDERSTAND IN THIS MANNER
+###############################################################################################################################################
+scala>x=INT=10 
+So we does need to give the datatype scala engine understand itself
+scala>y="xyx"
+scala understand in this manner
+y:[string]='xyz'
+there are two types of variable structure 
+		                            immmutable				                 mutable
+Key		                           val						                    var
+
+in java  						var a ="abc"
+>val a=10						a="xyz
+a =20 
+Intrepreter raise an error
+################################################################################################################################################
+Q:-What is difference between val and var?
+#################################################################################################################################################
+scala>a=10
+scala will store in this manner
+res0:a=int=10
+>b=20
+>a+b
+job:>30
+#################################################################################################################################################
+Q:What is REPL?
+R=READ 
+E=EVALUATE
+P=PRINT
+L=LOOP
+IT IS A KIND OF MECHANISM WHICH SCALA WILL USED 
+FIRST IT WILL READ THE DATA THEN IT WILL PRINT THE DATA 
+================================================================================================================================================
+Scripting there is another way to execute that is Batch mode
+hi.scala
+a=10
+b=20
+a+b
+===================================================================================================================================================
+root folder only hadoop mode
+$>scala hi.scala
+when we execute this code we get output
+30
+####################################################################################################################################################
+scala -i hi.scala
+means after executing hi.scala after that it enter into scala shell mode.
+----------------------------------------------------------------------------------------------------------------------------------------------------
+Loading mulivalue in the scalascala>val v1=List(1,2,3)
+===================================================================================================================================================
+Lecture 2:-
+
+it support all the datatype when we store the value in it Suppose we want to perform the simple operation
+==================================================================================================================================================== 
+add={int a=10;int b=20; a+b;}
+add: int=30
+We have more advantage with scala
+scala>var a =10
+	   >var b=20
+	   >if(a>b a else b)
+	   >res:b
+     >print the value of these of these value
+	   >println(a);
+	   >println("Hello")
+	   >print we can use but it can give in the sequence ,anner
+######################################################################################################################################################
+scala>var a =-5
+	 >if(a>0) "positive"
+	 else Negative
+	 val res =if(a>0) "positive"
+	 else Negative
+	 res="-ve"
+	 
+	 
+Loop working in the scala
+in other programming we have 
+while 
+do while
+but in scala it is some what change
+
+X=1;
+scala>while(X<5)
+		{
+				println(x);
+				x++; Not supported
+				x=x+1;
+				print(x)
+		}
+scala does not support increment and decrement
+
+Do while Loop
+X=1;
+scala>do
+		{
+				println(x);
+				x++; Not supported
+				x=x+1;
+				print(x)
+		}while(X<5)
+==========================================================
+For Loop
+
+for(x<-1 to 5)
+{
+	print(x);
+	x=x+1;
+	
+}
+O/p:12345
+
+-----------------
+for(x<-1 until 5)
+{
+	print(x);
+	x=x+1;
+	
+}
+O/p:123
+=========================================
+Q.what is the difference untill and to?
+
+ we can use foreach in the scala
+ scala>val x="Scala"
+	  >foreach(println)
+S
+C
+A
+L
+A
+---------------------------
+If we use print
+>foreach(print)
+Scala
+---------------------------
+for(x<-a until d)
+		 to
+{
+	print(x);
+	x=x+1;
+	
+}
+O/p:output in to case:a,b,c,data
+case:a,b,c
+
+=============================Lecture36 part -3===================
+Lecture:3
+How we define the function
+
+def function-name(param-list):[return-type]
+{
+	//body
+	 
+	return int(DT)
+	//SOMETIME WE GIVE EXPRESSION
+	return result;
+}
+--------------------------------------------------------------
+Function which does not have return type is called procedure
+
+def sum(a:int ,b:string)
+{
+    println(a+b);
+}
+sum(10,20)
+
+==================================================
+def sum(a:int ,b:string):int
+{
+    return(a+b);
+}
+sum(10,20)
+
+===========================================================
+def sum(a:int ,b:string)int
+{
+    return(a+b);
+}
+val t1=sum(10,20)
+
+//function calling
+sum(a,b);
+=================================================
+Handling multiple value
+
+collection is key hold container to store the data object as entity
+
+If we want to learn these collection
+
+                     Transversable
+|
+                      Iterable  seq hve two types linear sequence and Indexed Sequence
+           set
+Sorted Set			Bit set
+
+======================================================
+===============================ARRAY============
+Array is used to store similar kind of value
+
+TO DEFINE THE ARRAY IN Scala
+
+	>Val id=array(100,101,103)
+	>id(1)=102
+	>id.length
+===============================================
+We can create the five string of array
+>var name=array(string)(5)
+>name(0)="xyz"
+>name(1)="abc"
+>name 
+res:(xyz,abc)
+
+
+====================array buffer=======================
+
+>val name ArrayBuffer(string)(5)
+>name(0)="xyz"
+>name +="abc"
+>name "xyxz","abc","pqr"
+>name termEnd();
+if we know index
+>name.remove(1);
+for inserting
+
+>name.insert(1,"mnp");
+			(1,"a","b","c");
+			
+=================================
+map
+<k,v>
+key -are unique 
+value- no need maintian unique it can be duplicate
+
+Suppose we want to define map 
+val S1=map("101"->"abc"
+		   "102"->"bbc"
+		   "103"->"abc")
+>S1
+
+when we have to print the particular
+>Println(S1(102));
+>bbc
+
+
+ADDING 
+>S1+="104"->"xyz",
+
+DELETING
+>S1-="102"
+>S1=101,103,104
+as we see that 102 get deleted
+
+as we are inserting the data into and replace 102 with xyz
+>val S1+="102"->"xyz"
+
+>S1("101")=>"abc"
+>s1("abc"=>101 it does give error
+>s1("104")
+compiler give error because the value is not avaliable 
+
+if we want compiler will not raiseerror
+>S1(104) getOrElse("0");
+0
+
+>S1(104) getOrElse("mnp");
+104->"mnp"
+==============================================================================================================================================================
+Tuple
+#############################################################################################################################################################
+>val id =(101,102,103)
+>val id=(101,"abc",103)
+###fetching data from tuple
+index start in tuple is 0,1,2
+>id
+>println(id-2)=>"abc"
+>println(id-2)=>103
+############################################################################################################################################################
+By using tuple how can we do processing
+>ScaLA.partititon(-isUpper())
+O/P-
+(SLA,ca)
+(res1,res2)
+>ScaLA.partititon(-isLower())
+(ca,SLA)
+(res1,res2)
+##########################################################################################################################################################
+List==List is mutable
+val sid=List(101,102,103)
+##########################################################################################################################################################

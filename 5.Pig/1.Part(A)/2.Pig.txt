@@ -1,0 +1,270 @@
+Lecture pig 4
+=====================================================
+We do one one program by taking the example of Word count
+
+terminal>nano wc.log
+editior will open in editior we add
+
+hi hello hihi hi 
+hellohello good good
+bad
+bad good
+
+
+--------------------------
+terminal>cat wc.log
+Now we want to see how many hi hello in this script are there in my wc log file
+
+
+i have script for this
+terminal>cat wordcount.pig
+we see the script is
+A= LOAD 'script1.pig';
+B = foreach A generate flatten(TOKKENIZE((chararray)$0)) as wordcount
+C=  GROUP B by word;
+D =foreach C generate COUNT(B),GROUP;
+store D INTO './wordcount';
+
+
+====================================
+terminal>nano wordcount.pig
+
+Here we already develop the log file
+
+A=load 'wc.log';
+B =foreach A generate flatterm
+c=group B by word;
+D = foreach  generate COUNT(B),group;
+store D into './wcOUT';
+
+terminal>nano wordcount.pig
+terminal>cat wordcount.pig
+
+A=load 'wc.log';
+B =foreach A generate flatterm
+c=group B by word;
+D = foreach  generate COUNT(B),group;
+store D into './wcOUT';
+====================================
+How can we execute this code
+terminal>pig -x local word count.pig
+
+Output:-a folder is generate is wcout folder
+
+terminal>cd wcOUT
+terminal>ls
+part-r-00000 _SUCCESS
+
+TERMINAL>cat part-r-00000
+4 hi
+2 bad
+3 good
+3 hello
+
+-=======================
+terminal>cd..
+
+terminal>cat wc.log
+hi hello hi 
+hi hihello
+hello good goodbad
+bad good
+
+this is the input file
+========================
+
+
+What is UDF?
+
+Pig UDF is a customize replication access which is given by pig latin programinng 
+environment.If we want to make  our own customize program in other programming 
+langauage like java we embed this much java code in our pig latin program
+Suppose let us take simple example if our textual information in my file.txt
+
+it contain every data in the small cas  but if we ant to make the text in uppercase
+
+
+for this we have to make use of our java programm
+We write the code in java we have to develop a function with uppercase or lowercase converte
+we have to write the code in java
+
+
+For this we have to learn the custom datatype
+we have int float inrespect to string we have chararray
+
+Field
+Tuple:tuple is collection of fileds
+bag: it contains both male and female information
+inner bag
+
+In entire thing we have simple attribute Suppose we convert the entire data in 
+Each attribute in a file  attribute information we see as a atom if we combine this atom we get 
+filed if we combine
+
+Inner Bag synonyms relation bag
+
+What is different types of inner bag ?
+Inner bag:-
+
+Outer bag:-  
+
+
+
+============================================
+Simple Program to represent the lower case to upper case
+1)UPPER.java
+HADOOP Always understand in java program in the form jar
+2)UP.jar
+===============================================
+
+Simple UDF
+
+if we want to make custom udf function.
+if we want to make one function as udf
+
+We have to pass simple tuple when 
+
+imput is varible name tuple is the datatype
+
+
+if we get succes we get null
+
+
+input is tuple we converting to string
+
+string to upper case -function to convert the upper case to Lowercase
+
+
+We create the one another java class with upper 
+
+
+Add the pig jar
+we can download it from the internet
+
+We have to make one jar and export intoLinux environment
+pigudf->Export-as a jar-jarname is-up.jar
+
+
+How we put
+
+terminal>cp /mnt/hgfs/hadoop/ durgsoft/UP.JAR .
+terminal>ls
+We have to generate the sample text
+terminal>cat sample.txt
+Hello
+This is Monday
+Hello
+isthis this this
+
+================================================
+terminal>cat emp.log101:abc:10000;finanace:hyderabad
+102:xyz:200000:hr:
+103:
+
+If we write the pig script file
+
+First we have to register the jar files
+UP.pig 
+Register UP.JAR;
+A= LOAD 'emp.log' using PigStorage(':') as (eid:int,name:chararray,salary:int,dept:chararray,loc:charaaray);
+B= FOREACH A GENERATE eid,UPPER(name),salary,dept,loc;
+DUMB B;
+
+SaVE AND NOW WE EXECUTE
+
+terminal>pig -x local up.pig
+
+We get the output:-
+(101,ABC,10000,finance
+
+
+If we do the uppercase of finnace we have to change 
+
+up.pig
+
+
+
+
+==================================================================
+Pig
+What is Pig processing in hdfs?
+processing in huge amount 
+we dont use pig to store in hadoop cluster
+pig also take the data whether it is structure,unstructured,
+pig also processing the data in a faster manner because it also sharing parellel processing 
+techniques with respect to map reduce 
+
+To write the pig script we dont need to learn any programming
+pig itself provide the pig latin programming which is itself a collection of 
+built in of operator AND tranformation
+
+if we want to express the pig lation data fow tranformation
+we have a used mode of execution is 
+
+1.map reduce:-If We have TO GET THE DATA IN HDFS AND PROCESS THE DATA hdfs
+2.local :in the local filesystem we have to get the data in lfs and we also have to 
+post the data in lfs
+
+Based on the interaction with pig latin data flow tranformation divide
+
+some of the concept
+1.Interactive
+2.Embeded
+3.Script mode(exrension of the script is .pig)
+
+
+Both Interactive and and scriptmode is used to express the built in transformation
+
+when we talk about the Embeded tranformation we have to always think 
+about udf function
+as we see the case of the uppercase conversion
+
+========================================================================
+When we have to move into local then we use the command
+pig-x local
+when we have to move in the mr mode then we write
+pig
+===========================================================================================
+Suppose we want to execute the my.pig script in the top of the HDFS DATA
+Then we have to move in mr
+pig my.pig
+=========================================
+
+How can we create the udf
+
+procedure 
+we take the script like what is purpose of the data
+then we have to design our requirment based on the any programming lanaguage and best suited is java
+we have to create the java program in the jar file
+we have to keep this file in jar file
+if we executing our udf in local mode we have to keep in the lfs.
+Whenever we are are working in the hdfs then we have to keep the input data in hdfs
+always input the data in hdfs if we 
+
+
+When the data already in hdfs then we have to take the help of data in local mode execution only
+
+then we execute
+
+=======================================================================
+Writng the script to execute utilize this java archieve 
+first register this java or har file in our pig environemnt by using the key register
+
+Suppose we have name age gender
+
+name age gender
+a	 10 	M
+b	 11		M
+c    12		F
+We save this data in a file name as ip.txt
+Suppose we want to process this Male and Female data in summarizing things
+whenever we find the gender as m we keep it as male
+whenever we find the gender as f we keep it as female
+
+
+=======================================================================
+A =load 'ip.txt' Using PugStorage('\t') as (name:chararray, age:int, gender:chararray)
+B=FOREACH A GENERATE aname,age,GenderEx(gender)
+grunt>Dump B;
+
+REGISTER my.jar;

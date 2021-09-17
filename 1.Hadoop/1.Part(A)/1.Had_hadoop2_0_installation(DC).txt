@@ -1,0 +1,318 @@
+24.Lecture  =========
+Hadoop 2.x Version Installation
+========================================================================================================
+Only few we have to make change in 2.0 
+==========================================================================================================
+Steps:-
+==========================================================================================================
+1.Download the zip file by visiting apache.org website or type Hadoop Releases
+Save the on any folder work(name of the folder)
+2.Unzip the Hadoop 2.x Version File or Unzip the folder.
+3.When we get the unzip folder then we get a list of files
+4.Click on the unzip folder we get inside it ,we get etc file all the configuration 
+files related
+========================================================================================================== 
+a.)hadoop-etc-->all the configuration files related to installation
+All the configuration files is in the conf folder and when we can click and enter we get all the configuration folder We get only five files on which we work on 
+============================================================================================================
+5 Files--
+	conf(1.x)-> 
+	1.core-site.xml
+	2.hdfs-site.xml
+	3.mapred-site.xml
+	4.hadoop-env.sh
+	5.master
+	6.slave
+============================================================================================================
+When we come to 2.x version of Hadoop these setting are inside the etc folder 
+	1.core-site.xml   -->rpc port for NN
+	2.hdfs-site.xml   --->replications and Tempdata
+	3.mapre-site.xml ---->talk about yarn architecture
+	4.hadoop-env.sh  ---->set->the Java_Home
+	5.master		 ---->Localhost 
+	6.slaves		 ---->Localhost
+=========================================================================================================
+Some new file in the Hadoop2.x
+	7.mapred-env.sh ------>set->JAVA_HOME
+	8.yarn-site.xml	------>RESORCE MANAGER & Node Manager
+	9.yarn-env.sh  -------->set->JAVA_HOME
+=======================================================================================================
+Q.What are the new files come inside the hadoop 2.0 of configuration
+	
+Various New process coming up-
+1.resource manager--
+2.node manager
+Both belong map reduce process
+=========================================================================================================
+old 
+namenode
+datanode
+secondary namenode
+These two belong to hdfs
+----------------------------------------------------------------------------------------------------------
+Setting the Java Environment 
+.bashrc->setting up environemnt variables
+JAVA_HOME
+----------------------------------------------------------------------------------------------------------
+Q:-What the various service running in the hadoop 1.x and Hadoop 2.x?
+Hadoop 1.x									Hadoop2.x
+1.NameNode									1.Namenode
+2.Datanode									2.Datanode
+3.Job Tracker								        3.Node manager
+4.Task Tracker						                        4.Resource Manager
+5.Secondary Namenode				                                5.StandBy Namenode(SNN)
+===========================================================================================================
+The user account we use in the Ubuntu which we use hadoop must of administrator type
+============================================================================================================
+===========================================================================================================
+Lecture Notes 25.
+===========================================================================================================
+Step1:-The first step is we will create the folder "work"
+step2:-Copy the Downloaded tar file on to work folder
+step3:-Unzip the File4.Click on the unzipped folder
+step4:-hadoop 2.6.0/etc/hadoop/configuration files
+===========================================================================================================
+Configuration files of 2.X Version
+---------------------------------------------------------
+Configuration files of 1.x Version are			                        |	Configuration files of 1.x Version are
+												|								
+1.core-site.xml									|	1.core-site.xml
+2.mapred-site.xml								|	2.hdfs-site.xml
+3.hdfs-site.xml									|	3.mapred-site.xml
+4.mapred-site.xml								|	4.hadoop-env.sh
+5.hadoop-env.sh								  |	|       5.master
+6.maprred-env.sh								|	6.slave
+7.yarn.site.sh									| 				
+==========================================================================================================
+core-site.xml:-To store about data and its has rpc(remote port control) port
+hdfs-site.xml:-is used to mention two properties 1st mention the number of replication 
+and 2nd configure the namnode and Datanode 
+mapred-site.xml:-it talk about the property talk about yarn framework.
+hadoop-env.sh:-it is used to set the java path
+yarn-site.sh-this is place where we would mention new resource manager
+yarn-site.xml-Resource manager Node manager
+----------------------------------------------------------------------------------------------------------
+Q:--What is bashrc files?
+.bashrc file -this is the file where we should set the java path
+----------------------------------------------------------------------------------------------------------
+To see whether java is installed or not
+terminal>java -version
+----------------------------------------------------------------------------------------------------------
+now we extract the folder put in the work folder
+----------------------------------------------------------------------------------------------------------
+hadoop 2.6.0(folder)->etc->hadoop->
+and in this we get the configuration file in that we work on the
+different files
+1.hadoop-env.sh
+2.core-site.xml
+3.hdfs-site.xml
+4.mapre-env.sh
+5.mapred-site.xml template
+6.yarn-site.xml
+-----------------------------------------------------------------------------------------------------------
+we go to these all files and set the confiuration
+as we set earlier 
+----------------------------------------------------------------------------------------------------------
+core-site.xml
+<value>hdfs://hadoop2:8020</value>
+here hadoop2 is username where we login
+--------------------------------------------------------------------------------------------------------
+to see path is right or not
+terminal>echo $Java_Home
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+If it is not coming  we see the property we give in all files the username is given correct or not
+we see two folder etc one is outside and one in inside the hadoop /etc also we do all chanage in outside files and then copy that files inside the etc so that 
+that file setting get overwrite
+----------------------------------------------------------------------
+terminal>gedit -/.bashrc
+file will open inside the editior
+and under this we paste the all path iside it which we have done in hadoop 1.0
+under bashrc in the last line.
+-----------------------------------------------------------------------------------------------------------
+copyexport JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64
+----------------------------------------------------------------------------------------------------------
+terminal>cd usr
+teminal/usr>cd ls
+terminal>cd lib
+terminal>ls
+Now search the jvm folder
+terminal>cd jvm
+terminal>ls
+java-1.7.0-openjdk-amd64
+terminal>
+==========================================================================================================
+set the path of this file in every loaction
+where JAVA_HOME =Path we have to set
+
+export JAVA_HOME=mapred-env.sh
+also we set the path inside it
+--------------------------------------------------------------------------------------------------------
+if in terminal output of $HADOOP_HOME AND JAVA_HOME OUTPUT
+COME 
+terminal>echo $HADOOP_HOME
+
+sometime if the output is not coming open the new terminal
+----------------------------------------------------------------------------------------------------------
+terminal>hadoop
+To format the namenode
+if we don't fomrat then we dont see namenode being displyed
+terminal>hadoop namenode -format
+----------------------------------------------------------------------------------------------------------
+To start all the daemon
+
+terminal>start-all.sh
+
+termnal>jps
+=======================================================================================================
+Lecture 26
+========================================================================================================
+if under jps namenode is not coming then we have 
+terminal>jps
+3020 Datanode
+3678 jps
+3471 Resource Manager
+=========================================================================================================
+then we see the file 
+core-site.xml and change it
+=========================================================================================================
+ <value>hdfs://hadoop:8020</value>
+ to
+ <value>hdfs://localhost:8020</value>
+ save it and start the service
+------------------------------------------=================================================================
+terminal>stop-all.sh
+in this all daemon will stop-all
+==========================================================================================================
+terminal>start-all.sh
+wee see all the daemon will start
+terminal>jps
+3020 Datanode
+3678 jps
+3471 Resource Manager
+5144 Nodemanager
+------------------------------------------------------------------------------------------------------------
+again we stop all
+terminal>stop-all.sh
+if it not start then reformat the namnode again
+terminal>hadoop namnode -format
+-----------------------------------------------------------------------------------------------------------
+terminal>start-all.sh
+Whenever we have problem with datanode open the hdfs-site.xml&core-site.xml
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+terminal>stop-all.sh
+This script is Deprecated.Instead use stop-dfs.sh and 
+terminal>start-all.sh
+This script is Depceatcated.instead use 
+---------------------------------------------------------------------------------------------------------
+terminal>jps
+11012 	Jps
+10424 	secondaryNameNode
+10700 	Nodemanager
+10088	Namenode
+100240  Datanode
+All Daemon coming Up
+============================================================================================================
+27.Hadoop 
+Architecture of 2.x Architecture
+============================================================================================================
+New Components
+===========================================================================================================
+When we talk about Hadoop 1.x version we come to these Places
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1.Namenode
+2.Secodary Namnode
+3.Data Node
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Hdfs 
+4.Job Tracker
+5.Job Tracker
+6.Task Tracker
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+When we are talking about Hadoop 2.0
+NameNode 
+Secodary Namenode
+Datanode
+----------------------------------------------------------------------------------------------------------
+Resource Manager
+Node Manager
+These two combination will call Yarn
+------------------------------------------------------------------------------------------------------------
+--->What are the core components of HADOOP?
+HDFS
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Yarn 			Resources Manger this Resource manger interact with the Node manager 
+				  and each node manager iteracts with datanode
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
+Q1.What are the typical structure of Cluster?
+Different functionality that are introduce Hadoop 2.0
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q2.-What is Hadoop federation and High Availabilty?
+Hadoop Federation:-
+the mains main difference between 1.x and 2.x
+Hadoop Federation:-
+1.X VERSION deal with one name node
+2.x Version deal with many nam node also have secondary namenode
+----------------------------------------------------
+High Availabilty:-
+More than one name node is called passive namenode
+standby name node is also one
+active namnode is also one
+---------------------------------------
+======================================================================================================================================================
+			Secondary Namenode 		|			ActiveNamenode			|			StandbyNameNode
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ram:      		32 gb ram					         64gb						           64gb		
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++		
+Hdd:			1TB							 1TB	                    				   1TB
+Processor:		Xenon 4 Cores						 xenon 8cores	           			        xenon 8cores
+Enternet:		3x1gb Speed						 3x1gb Speed     					3x1gb Speed
+Opearating System-	64Bit (Linux)						 64bit	               					64bit
+PowerSupply----         Redudant						 UnInternet       					Redundant
+Datanode		64Bit
+=============================================================================================================================================================
+The communication happen between the secondary namenode and namenode would happen in 1 hour in hadoop1.x whatever the data that namenode has the communication 
+taken by the secondary namenode for one hour there could be the chance somethings happen to namnode we loose the one hour of data.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+But in hadoop 2.0 these demerit will be remove by introducing the namenode federation.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+===========================================================================================================================================================
+Lecture 28
+==========================================================================================================
+Concept Introduce in 2.x version of Hadoop.
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Hadoop Federation talk about separtion namespace layer from the blockstrage layer In hadoop federartion we 
+have one more one namenode or we can have one more namespace The concept of fedearation there is a Kind of having more than one namenode or 
+namespace In Hadoop 1.x Version of master slave archiecture of HADOOP we have one namenode and more than one datanode
+Inside the namenode we have a meta data
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Q.What are the different component of Metadata?
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Different component of MetaData can be categorised as
+==============================it has two layer=============================================================
+        Namespace Layer					  |			Block Storage Layer
+In Namespace we do have all the           |  there are two more layer when we come to Block Storage Layer
+information pertaining to blocks          |  1.Block Mnagement(information about blocks,Replication,Replication Placement)
+or folder Where does the particular       |  2.Physical Storage(it stores the block and Provide read and write access)
+files exists
+									|
+means information about the 		|
+Directory
+creation,Modification,Deletion      |
+Listing the Directories or Files    |
+on the cluster                      |
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Under metadata these two files are available and metadata comes inside the namenaode
+Inside the metadata there edit logs and filesystem image edit logs 
+Metadata:-Namespace Layer ,Block Storage Layer, edit logs
+Hadoop fedeartion clearly separtes namespace layer from the BlockSTORAGE  Layer
+having more than one namespace on 2.x version of cluster.
+-------------------------------------------------------------------------------------------------------------
+Q:-What bottleneck we comes 1.x version entire cluster?
+Namenode 
+Ram
+Processor-Xenon 8 cores
+
+When we come to metadata the entire data store on the main memory if we keep on dumping data on existing cluster next day few more files that copied to 
+existing cluster namenode Information about that particular 
+time my ram also run out of the memory 
+===========================================================================================================

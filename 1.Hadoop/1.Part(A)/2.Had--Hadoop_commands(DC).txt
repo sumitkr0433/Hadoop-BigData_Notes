@@ -1,0 +1,217 @@
+To check Whether Hadoop is insatlled or not we give this command in the terminal
+hadoop version
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Environment Mode of the HADOOP 
+1.Stand Alone Mode
+2.Pseudo Distributed mode
+3.Fully Distributed Mode 
+==============================================================================================================================================================
+To enter into HADOOP ENVIRONEMT
+It gives us a list of all the hadoop command
+===============================================================================================================================================================
+hadoop fs -help
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Hadoop Listing all the files:-
+
+hadoop hadoop fs -ls
+
+Note:-If we get an error like it is not able to load the native hadoop library.
+Though we have installed Hadoop but we are not able to fetch the commnads because
+because we dont start our daemon to check the daemon.What are the process are executing in Linux
+machine we use ps commands
+(Process)
+terminal>ps
+================================================================================================================================================================
+If we want to Know what are the java process are the we type the commands is jps(javaprocesssor)
+jps
+===============================================================================================================================================================
+Daemons we have to maintain in Hadoop 2
+1.Namenode 
+2.Secodary Namenode
+3.Datanode
+4.Resource Manager
+5.Node manager
+================================================================================================================================================================
+1.To start all Daemons in Hadoop cluster or in HADOOP ENVIRONMENT
+
+start-all.sh
+all the daemons we start
+
+if we want to execute the particular daemons then we execute the se commands
+To Stop all the Daemons from the HADOOP Cluster is 
+
+stop-all.sh
+
+As stop-all.sh internally execute the commands  
+stop-dfs.sh 
+which contains the filesystem namenode datanode and secondary node
+
+If we want to introduce map related and yarn related storage we use commands
+
+start-yarn.sh
+===============================================================================================================================================================
+If want to see what are files and folder in hadoop root folder we use commands
+
+hadoop fs -ls /
+=============================================================================================================================================================
+How can we create the hadoop directory
+
+hadoop fs -mkdir /hdfsFolder1
+
+The hdfsFolder1 get created 
+
+To see this folder get created or not we use the commands ls
+ 
+hadoop fs -ls /
+ 
+ ===================================================
+ How to copy  a files which in our local system to hadoop environment
+ 
+ We have two file system 
+ 1.LFS LINUX FILE SYSTEM
+ 2.Hadoop file system
+ We cant craete the file in hadoop file system we have to copy the files from the 
+ Local file system to hadoop file system
+ 
+ Copy a file to lfs to hdfs we use the commands put for the reverse we use get
+ 
+ LFS----->HDFS-->put/Copy
+ HDFS--->LFS--> get/copy
+ --------------------------------------------
+ moveFromLocal--- in this we can move the file from the local to hdfs but reverse is not working 
+ 
+ moveToLocal this commands is not avialve;
+ 
+ terminal>cd Firsdirectory
+ terminal>ls
+ terminal>first.txt
+ terminal>hadoop fs -put first.txt /hdfsfolder1
+ 
+ To see the files get copied in hdfs or not we use the commands
+ hadoop fs -ls /hdfsfoler1
+ 
+ it give the file i.e first.txt
+ 
+===============================================
+Reading
+------------------------------------------------
+Reading the data i.e read the fie first.txt in hdfs directory we have the commands
+
+hadoop fs -cat /hdfsfolder1/first.txt
+
+
+this show the all the content in first.txt
+
+=========================================================
+Removing
+Removing the file in linux file system 
+rm first.txt
+
+Removing the commnands in HDFS
+hadoop fs -rm /hdfsfolder1/file.txt
+
+rm commands is used to remove the files
+rmdir commands is used to remove the directory
+
+hadoop fs -rmdir /hdfsfolder1/file.txt
+=================================================
+Copy the data from the hdfs to local
+hadoop fs -get hdfssource locaion destinationlinux location
+
+hadoop fs -get /hadoopfolder1 first.txt .
+
+hera last dot denote the present working directory and .. dot represent the 
+parent directory.Whatever the size of file.txt we put in hdfs Directory
+=====================================================================
+How can we change the content of first.txt
+We open this file in vi editior 
+
+we open the vi editior 
+vi first.txt 
+we maade change in the editior  and save the content and we see the content of the file
+Now we see by cat commands
+cat first.txt
+it show the content in the first.txtand we 
+editor open we change 
+
+In hdfs we see the content 
+hadoop fs -cat /hdfsFolder/first.txt
+
+Note:-
+In hadoop system we cant made update and modification of the file
+for update like we cant execute the commands like 
+hadoop fs -vi first.txt
+error we get because we cant update in that
+To update like operation we have to do we have to get the files from the hdfs to local then do the editing or updation and
+and then again put to hdfs.
+=============================================================\
+8th Lecture
+pwd is commands is used to see the present Directory
+
+To list all the Daemon working we check by giving commands 
+jps
+
+----------------------------------------------------------------
+to check architecture of daemon 1.2 and daemon 2.2 we have commands
+safe mode commands
+
+hadoop fs -safemode get 
+this commands will not work for this we have to use the dfs not fs
+-----------------------
+hadoop dfsadmin safemode get
+
+get commands is used to see the status of safe mode in hadoop cluster
+if safe mode is off
+
+How can we on the safe mode we use the commands enter 
+
+hadoop dfsadmin safemode enter
+
+when we turned on the safe mode we dont perform the command like copying 
+the file from the local or vice versa
+
+
+How can we turned off the safemode so that we can perform the hdfs command likecopying the file 
+or moving the file we run the commands
+
+hadoop dfsadmin safemode leave
+=================================================
+To stop all the daemons like namnode datanode etc we use the commands
+
+stop-all.sh
+
+jps this commands is used 
+
+=======================================================
+How can we see the replication
+we open th hadoop folder 
+hadoop->etc-hadoop-hdfs.site.xml
+open it 
+
+<property>
+ <name.dfs.replication</name>
+ <value>1</value>
+ </property>
+under this we set namenode as well as datanode
+
+We have another file start.sh and stop.sh
+hadoop-->sbin --
+under sbin we have start.sh and stop.sh
+
+
+===================================Hadoop 1.1x---
+In hadoop 1.1 if we want to see all the daemon we first start all the daemon
+by running the commands 
+start-all.sh
+all daemon start 
+datanode
+secondary namenode 
+tasktracker
+jps
+jobtracker
+we see the job tracker and task tracker because we are working with hadoop1.0
+========================================================================
+
+
+
+

@@ -1,0 +1,306 @@
+20 Lecture Hadoop 
+-----------------------------------------------------------
+In this session on Hadoop commands
+
+1.To see what are the process are running
+-------------------------------------------------
+terminal>jps
+4277 Jps
+-------------------------------------------------------------
+2.To start all hdfs 
+terminal>start-dfs.sh
+Only three Daemon will run which belong to hdfs
+4720			jps
+4333			Namenode
+4638			Secondary Name node,
+4479			Datanode
+-------------------------------------------------------------------------
+When we are installing hadoop we have change in the conf folder hadoop folder 
+under hadoop folder when we untar we have done some changes under five files
+that are :-
+hdfs-site.xml
+core-site.xml
+master
+slave
+------------------------------
+Open the conf folder under this we worked on these five files
+
+open all these file in gi editior
+
+------------------------------------------------------
+1.core-site.xml
+------------------------------------------------
+under these we set the two property
+core site talk about namenode
+tmp/folder created or not 
+------------------------------------------------
+2.hdfs-site.xml
+------------------------------------
+Under this we set the replication factor
+-------------------------------------------------------
+3.mapred-site.xml
+--------------------------------------------------------
+mapred talk a jobtracker and task tracker
+job tracker and namenode are called as masternode
+
+under this 
+mapred.job.tarcker
+--------------------------------------------
+4.master
+--------------------------
+we see here we localhost only
+-----------------------------------------------
+5.hadoop-env.sh
+-------------------------------------------------------
+-------------------------------------
+6.to stop all the process
+terminal>stop-dfs.sh
+stopping job tracker
+stopping: namenode
+localhost:stopping datanode
+localhost:stopping secondary namenode
+--------------------------------------------------
+7.if the java_home is commented then at the start of the 
+start-all.sh
+we get an error that java_set is not set
+
+to uncomment it and start the service our error get resolve
+------------------------------------------------------
+8.Under dfs.name property we give in all the 5 files 
+it get genrated or not
+----------------------------------------------------
+9.
+work/hadoopdata/tmp/dfs/namenode/secodary/current/
+Under we see the content of edit and fsimage
+
+open it and see its content
+
+------------------------------------------
+To format the namenode
+terminal>hadoop namenode -format
+
+terminal>start- mapred.sh
+when we mapred.sh start a dirctory created 
+-----------------------------------------------------
+if we want to see namenode interface
+localhost:5070/dfshealth.jsp
+in the browser 
+
+--------------------------------------------
+====================================================
+Commands which we used on the hdfs
+Commands execute in the hdfs
+
+Linux local filesystem
+terminal>mkdir naveen
+
+terminal>hadoop fs -mkdir naveen
+warning:$Hadoop_Home is depreceated
+---------------------------------------
+Linux Creation
+terminal>ls
+Hadoop 
+
+How can we see hadoop directory
+
+open the browser
+give the url:500
+we get hadoop administration page
+
+click in the file browser system we see the gui pictorial of directory
+
+terminal>hadoop fs -mkdir /usr/hadoop/naveen2
+
+How to change the Permission and Group
+--------------------------------------------------------
+Hadoop ls and Linux local file have different Output
+
+
+Hadoop commands to create the file
+terminal>hadoop fs -touchz /user/naveen/xyz.txt
+
+Hadoop ui we go and see 
+localhost:5070
+browse local file
+
+To view the content of the files
+Linux commands
+========================================================================================
+========================================================================================
+=======================
+terminal>cat
+
+=================================================================================================
+========================================================================
+21 Lecture
+====================================================================================
+1.
+terminal>hadoop
+it gives us a list of all componets 
+----------------------------------------------------------------
+terminal>hadoop fs -mkdir 
+------------------------------------------------------------------
+To start the Hadoop service(datanode,namenode,)
+termina>start-all.sh
+----------------------------------------------------------------
+ctrl+l to clear the screen(Terminal)
+WEB UI OF namenode:-localhost:50070
+------------------------------------------------------------
+Getting the list n local
+terminal>ls
+------------------------------------------------------------
+Getting List in root Directory
+
+terminal>hadoop fs -ls /
+drwxr
+d represent whether this is directory or not
+rwx-read write and execute perminssion
+----------------------------------------------------------------------
+Touch commands is used create any file
+Hadoop Environemnt
+terminal>hadoop fs -touchz /user/abc
+abc file get created
+--------------------------------------------------------------------------
+terminal>cat > xyz.txt
+I am Learning Hadoop
+I am Learning BigData
+Save it
+-----------------------------------------------------------------------
+To see the File 
+terminal>cat xyz.txt
+
+To copy into Hadoop Environment
+terminal>hadoop fs -put /home/hadoop/xyz.txt /user/
+-----------------------------------------------------------------------
+To see the Hadoop File system
+terminal>hadoop cat xyz.txt
+------------------------------------------------------------------
+Get commands
+Get commands is used to get the file from the hadoop environment 
+to local environment
+
+terminal>hadoop fs -get /user/nav1 /home/hadoop/durgasoft
+
+terminal>cd durgasoft/
+terminal>ls
+nav1
+
+terminal>ls
+nav1
+terminal>cat nav1
+
+Moving the files from the local to hadoop
+terminal>hadoop fs -copyFromLocal /home/hadoop/nav1  /naveen/
+/home/hadoop/nav1---from this location copy to this location /naveen/
+--------------------------------------------------
+Moving the file from the hdfs to local
+
+terminal>hadoop fs -copyToLocal /user/nav1
+
+Moving the files from the One Loaction to Anohter Loaction
+terminal>mv 
+-------------------------------------------------------------------------
+Copyng(cp)
+copying the commands from the one location to another Location
+terminal>hadoop fs -cp /naveen/xyz.txt/user/
+----------------------------------------------------------------
+remove(rm)
+terminal>
+------------------------------------------------------------
+Hadoop environment
+terminal>hadoop fs -rm /naveen/nav1
+Note-Make sure that drive is empty
+
+Q.what is the difference between rm and rmr?
+rmr is command which removes all the directory recursively
+--------------------------------------------------------------------
+stat commands
+
+terminal>hadoop fs -stat /user 
+
+---------------------------------------------------------------------
+Du commands Disk Usage Commands
+terminal>hadoop fs -du /user
+Found 6 items 
+0    
+
+du gives us aggretae the length of the commands
+--------------------------------------------------------------------
+
+
+--------------------------------------------------------------------
+Lecture 21
+--------------------------------------------------------------------
+Mode to change to Hadoop
+changing the owner changing the group changing the user
+
+-rwxrw-r--
+-drwxrw-r--
+
+rwx-the first three is for owner 
+next seconds for memebrs =for the particular user
+last for the other user 
+-- means permission is not available for the user
+
+
+rwx rwx rwx == 111 111  111
+rw-rw-rw-   == 110 110  110
+rwx--- ---	== 111 000  000
+
+rwx = 111 in binary =7
+rw-=110             =6 read and write permission
+r-x=101             =5
+r--=100				=4
+
+chmod 600 /user/nav1
+chmod rw----------
+-------------------------------------------
+Lecture 23
+---------------------------------------------
+#Different Components under hadoop
+Q1..What are the tools that helps us to work on the Big Datanode?
+Hive 	avaro
+sqoop	Pig
+flumes	spark
+Oozie	hcatalogue
+
+Hive(DatawareHouse):-		
+								Data Access
+Pig(Data Analytical Tool)	
+----------------------------------------------
+Hbase or Cassandra			Datastorage
+--------------------------------------------
+Hcatalog					Interactions
+-----------------------------------------------
+crunch						Development
+-------------------------------------------------
+Avro						Data Serialization
+----------------------------------------------------
+Mahout						Machine Learning
+------------------------------------------------------
+====================================================================
+sqoop,flume,chukwa===Data Ingestion Tool
+
+Ambari,		======			Management
+Zookeeper	======			Monitoring
+Oozie		======			WorkFlow
+Q2.What are the core component of the Hadoop?
+Map Reduce
+Yarn
+HDFS
+
+Q3.What is the difference between hadoop 1.0 and 2.0 Version?
+
+Hadoop 1.X				                                                   Haddop 2.X
+
+
+|			Hive Pig	 Mahout
+			oozie											|			====================	
+		Hive Pig	 Mahout									|	        Hbase	map reduce framework
+======================================================	    |			====================
+Hbase|	map reduce framework								|		    Yarn(Cluster Resource Mangement)
+========================================================	|   		====================
+			HDFS											|			HDFS
+															|
+	Flume					  Sqoop(Bidirectional Data)		|   Flume			Sqoop(Bidirectional Data)	
+(Flume is generally 		  it is Bidirectional used for unstructured data)

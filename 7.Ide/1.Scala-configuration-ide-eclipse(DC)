@@ -1,0 +1,32 @@
+1.....++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+sudo apt install default-jre
+Download and install the Eclipse snap package on your system, by typing:
+sudo snap install --classic eclipse
+On successful installation of Eclipse, you should see the following output:
+eclipse 2019-03 from Snapcrafters installed
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Ecliipse installing for the Scala programming:---
+https://medium.com/beeranddiapers/how-to-install-scala-plugins-in-eclipse-in-ubuntu-13e53ffe3f39
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+1...Once Eclipse in installed Go to help-> Install New Software
+2...Go to http://scala-ide.org/ and Click on Update Sites (button)
+3....Copy the Update Site url from the website which is below in our case
+http://download.scala-ide.org/sdk/lithium/e47/scala212/stable/site
+4...Click on add and then provide custom name and paste the url & Click on Add
+add---scala-plugin
+location:--paste the url
+5.Select all and click on Next
+6.Accept the terms and click on Finish
+7.Eclipse will start installing the plugins On bottom corner you can track the progress
+Testing installation
+Go to “File” — “New” — “Other…” and select “Scala Project” from the folder “Scala Wizards”
+Choose a project name and select “Finish”
+8. Select “File” — “New” — “Scala Object” to create a new object
+9. Enter Hello as the name for the object
+10. Change the source code to the one given below
+object Hello extends App{println(“Hello World”)}
+
+11. Save the file and select from the top menu bar, “Run” -> “Run as” -> “Scala Application”
+You should see a the hello world output in the Eclipse console:
+...............................................................................
+

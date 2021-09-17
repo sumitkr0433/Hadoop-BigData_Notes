@@ -1,0 +1,374 @@
+=========================How can we install 1.x hadoop on the ubuntu=================
+
+---------->To understand user in the Ubuntu--------------------->
+1.Creating the user and delete the user
+-----------------------------------------------------------------------------------
+1.Open the system Settting
+2.Click on the user Account
+3.We see whatever the user We can create the user from Here.
+To create the user we give the Account type is of Administrator
+
+Account Type - Administrator
+
+We create the user
+hadoop 1 2 3 4
+=========================================================
+2.To set the password we open the terminal
+-----------------------------------------------------------------------
+terminal>sudo password hadoop4
+[sudo]password for hadoop1:
+Enter new Unix password:123  (Here we give the password for the user hadoop4)
+Retype the Unix Password   
+
+So we create the user hadoop4 and set the password
+
+How can we see the number of the user 
+
+As we click on the gear mark sign we see all the name of the user are Listing
+---------------------------------------------------------
+3.How can we delete the User
+-----------------------------------------------------------------
+1.Open the system setting and open the user account setting
+select the user and click on the delete icon
+
+--------------------------------------------------------------------
+Hadoop installation on the 14.01
+Open the terminal 
+To install the hadoop first we have to update the Operating system
+either login to sudo user or if we create the custom user make sure it is of 
+administrator account type
+terminal>sudo apt-get update
+[sudo]
+
+-----------------------------------------------------------------
+4.Installing the jdk on Windows
+-----------------------------------------------------------
+terminal>sudo apt-get install openjdk-6-jdk
+Installing the ssh 
+terminal>sudo apt-get-install ssh
+--------------------------------------------------------
+5.Installing the ecllipse ide
+Eclipse is environment where we get the environment to work
+-----------------------------------------------------------------
+terminal>sudo apt-get install ecllipse
+------------------------------------------------------------
+6.Installing the Mysql:- To work on the Hive Sql we install the Sql
+-----------------------------------------------------------------
+terminal>sudo apt-get install mysql-server mysql-client
+
+Before installing the Hadoop we have to set the host and host name
+terminal>sudo nano  /etc/hosts
+Editior will open Here we see the Host Name 
+==========================================================
+7.Seeing all the 
+-------------------------------------------------------------
+/etc/hosts
+127.0.0.1 localhost
+127.0.1.1 hadoop
+
+#The following lines are desirable for IPv6 capabale hosts
+ctrl+s
+ctrl+x
+==============================================================
+8.terminal>sudo nano  /etc/hostsname
+the name of the root user we see in the editor
+=====================================
+editor we will show the name of the user
+hadoop
+-------------------------------------------
+9.Now what we have execute we see the list by typing history
+
+terminal>history
+---------------------------------------------------------------------------------------
+10.Creating the User
+------------------------------------------------------------------------------------------
+terminal>sudo adduser hadoop4
+Adding all the information which are asking 
+
+adding user hadoop4'....
+Adding new group hadoop4'(1003)...
+Adding new user 'hadoop4'(1003)....with hadoop4...
+Enter the new value,or press ENTER for the default
+		Full Name[]:
+		Room Number [];
+		Work Phone [];
+		Home Phone [];
+		
+10.To check whether hadoop 4 is created or not
+=================================================
+11.Now we install Hadoop 
+--------------------------------------------
+12.Mode of Installation
+------------------------------------------------------
+There are three types of Installation
+Singly mode Installation OR Standalone Installation(
+Pseudo mode Installation(
+Fully Distributed Installation
+------------------------------------------
+13.Now we type the Hadoop release in the google we go the site
+We get the List of Hadoop Installation
+
+google.com->hadoop releases
+-------------------------------------------------------------------------------------
+=============================================================================
+===========================================================================
+Lecture 19
+================================================================
+14.Download Hadoop 
+
+Go to Google.co---->hadoop releases
+Now we download the release we download the hadoop 1.x and kept in the 
+folder work folder and kept inside in it
+----------------------------------------------------------------------
+15.
+a)create the work folder any where we can create any where else
+generaly click on the files go to computer and then go to home 
+
+we see the hadoop user name is present by which we login
+we create the folder there but its upto u where u want to create
+================================================================
+16.
+Now we copy the the hadoop and paste the content in the work folder 
+which we have created work folder
+
+also unzip the hadoop 
+we get the folder hadoop-1.1.2 when we open this  a lot of folder we
+see all the folder has its important like 
+The folder we see are:--
+1.bin 
+2.c++
+3.conf
+----------------------------------------------------------
+==========Conf Folder==============================
+-------------------------------------------------
+17.When we get into conf folder we see these files are avaialble
+
+1.capacity-scheduler.xml
+2.configuration.xml
+3.core-site.xml
+4.fair-scheduler.xml
+5.hadoop-env.sh
+6.slaves
+
+Most important file 
+1.core-site.xml
+2.hadoop-env.sh(hadoop environment 
+3.hadoop-site.xml
+4.master
+5.hdfs-site.xml
+6.slaves
+
+These are the files we work on when we are installing
+==================================================
+18.Now we open these six file with gi edit
+
+1.core-site.xml
+--------------------------------------------------------
+Under this files we write some important configuration we write 
+under this closed tag
+
+<configuration>
+
+</configuration>
+------------------------------------------------------------
+2.hadoop-env.sh
+-------------------------------------------------------------------
+in this we see various scripting Line
+ 
+These Lines we have to concentrate we have to set java_home
+ -----------------------------------------------
+#export Java_Home=/usr/lib/j2sd1.5-sun
+ 
+#export Hadoop_CLASSPATH==
+
+-------------------------------------------------
+3.master
+Under master files we see localhost is writen
+Master files holds the information about the secodary name node
+In the pseduo node installtion we don't see other than sthis
+But when we doing the fully distributed Installation or multinode installtion we see more 
+information in the masters.  
+--------------------------------------------------------------
+======================================================
+Now we open PsudoingConfr folder that we get while extract
+1.core-site.xml
+2.hadoop-env.sh(hadoop environment 
+3.hadoop-site.xml
+4.master
+5.hdfs-site.xml
+6.slaves
+
+Now we open the core-site.xml ,hdfs-site.xml,mapred-site.xml
+
+We open the core-site.xml under gieditor
+Under the core-site.xml
+====================================core-site.xml=============
+<?xml version="1.0"?>
+<xml-stylesheet type="text/xsl" href="configuration
+
+Under the configuration tag we
+---------------------------------------------
+<property>
+<name>fs.defaultname</name>
+<value>hdfs://localhost:9000</value>
+</property>
+This is remote procedure call it is changebale some books
+have we see 8020 or 8021.9000 is standard port number we are using
+This is the where we store the data for the namenode.
+Q.What does this code means what does this tell?
+<name>fs.defaultname</name>
+------------------------------------------------------------
+2.part of core-site.xml
+-------------------------------------------------------
+<property>
+	<name>hadoop.tmp.dir</name>
+	<value>/home/hadoop/work/hadoop/tmp<value>
+</property>
+</configuration>
+
+Note:-<value>/home/hadoop/work/hadoop/tmp<value>
+hadoop is the name of the username if any username is there we change 
+it.Where ever this value is set 
+---------------------------------------------------------------------
+Q->What does this reprsent
+<value>/home/hadoop/work/hadoop/tmp<value>
+=============================================================
+2.hdfs-site.xml
+------------------------------------------------------------
+Under the hdfs-site we have three property replication ,name node property  and
+data where we install.
+-------------------------------------------------------------
+First Property
+<property>
+<name>dfs.replication</name>
+<value>hdfs://localhost:9000</value>
+</property>
+----------------------------------------
+2.Second Property
+<property>
+	<name>dfs.name.dir</name>
+	<value>/home/hadoop/work/hadoop/tmp<value>
+	</property>
+----------------------------------
+3.Property
+<property>
+	<name>dfs.data.dir</name>
+	<value>/home/hadoop/work/hadoop/tmp<value>
+	</property>
+---------------------------------------------------------------------
+4.mapreed-site.xml
+We get the property for the job tracker
+1.property
+<property>
+<name>mapred.job.tracker</name>
+<value>localhost:9001</value>
+</property>
+-----------------------------------------
+2.Property
+<property>
+<name>mapred.local.dir</name>
+<value>/home/hadoop/work/hadoop/tmp<value>
+</property>
+------------------------------------------
+3.Property
+<property>
+<name>mapred.system.dir</name>
+<value>/mapred.system<value>
+</property>
+</configurataion>
+------------------------------------------
+====================================================
+hadoop.env.sh
+--------------------------------------------------------------
+#export Java_Home=/usr/lib/jvm/java-1.6.0-openjdk-6-jdk
+----------------------------------------------------------
+also we have to uncomment it also we have update our jdk is installed
+for this we open the terminal .This value we have to define
+terminal>dir
+terminal>pwd
+go to home
+terminal>cd..
+
+Now we look for usr directory where our java get installed
+terminal>cd usr
+terminal>dir
+bin games include lib local sbin share src
+terminal>cd lib
+terminal>ls
+now we search for the jvm
+
+terminal>cd jvm
+terminal>dir
+default:java java-1.6
+
+This is one way for finding the path of the jvm
+
+Now we do manaually also
+root folder/usr/lib/jvm/java-1.6.0-opoenjdk-amd64
+this the path we give under the Export Java_Home
+export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64
+------------------------------------------------------------------------------
+
+------------------------------------------------------------------a
+This Path is Optional
+#export HADOOP_CLASSPATH=
+
+=====================================
+NOW WE COPY ALL THESE FILES FROM THESE Folder(PsudoingConfr)
+and we paste inside the hadoop/conf folder
+so it raise the error whether to replace it 
+
+Now We open the files check it updated or not
+we see it get updated
+=====================================================================
+19.Now after setting the path we open this file 
+-------------------------------------------------------------
+terminal>sudo gedit -/.bashrc
+[sudo]password for the sudo
+
+file will get open
+
+THIS IS THE CONFIGURATION WE HAVE TO UPDATE IN .BASHRC FILE
+--------------------------------------------------
+this configuration we have to update in the bashrc file 
+export Java_Home=/usr/lib/jvm/java-1.6.0-openjdk-6-jdk
+export Hadoop_Home=/home/hadoop/work/hadoop-1.1.2
+export Path=$HADOOP_HOME/bin:JAVA_HOME/bin:$Path
+
+ssh localhost 
+ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa
+cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorised_keys
+--------------------------------------------------------
+#After updating close the terminal and open it again
+
+
+Now we have to set ssh localhost
+terminal>ssh localhost
+yes
+password
+this syntax is to disbale the password that is dsa and rsa algorithm
+terminal>ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa
+
+after this command system will not ask 
+--------------------------------------------------------------
+after disabling the key we are executing this commands
+terminal>cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorised_keys
+
+==========================================================================
+Ater this we have to fomrating the namenode
+
+terminal>hadoop namenode -format
+
+this is command to fomrat the namenode
+
+When we start the hadoop for the first time we use the command
+
+terminal>start-all.sh
+
+
+What are the process are running we have the command
+terminal>jps
+86 Namenode
+   Tasktracker
+   Datanode
+	

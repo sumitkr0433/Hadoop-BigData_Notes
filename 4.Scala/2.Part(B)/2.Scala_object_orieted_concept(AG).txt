@@ -1,0 +1,292 @@
+class Student{  
+    var id:Int = 0;                         // All fields must be initialized  
+    var name:String = null;  
+}  
+object MainObject{  
+    def main(args:Array[String]){  
+        var s = new Student()               // Creating an object  
+        println(s.id+" "+s.name);  
+    }  
+}  
+
+==================================
+
+class Student(id:Int, name:String){     // Primary constructor  
+    def show(){  
+        println(id+" "+name)  
+    }  
+}  
+object MainObject{  
+    def main(args:Array[String]){  
+        var s = new Student(100,"Martin")   // Passing values to constructor  
+        s.show()                // Calling a function by using an object  
+    }  
+} 
+
+==================================
+Scala Anonymous object
+===========================
+
+
+class Arithmetic{  
+    def add(a:Int, b:Int){  
+        var add = a+b;  
+        println("sum = "+add);  
+    }  
+}  
+  
+object MainObject{  
+    def main(args:Array[String]){  
+        new Arithmetic().add(10,10);  
+  
+    }  
+}  
+
+===================================
+singleton object 
+-=================
+
+object Singleton{  
+    def main(args:Array[String]){  
+        SingletonObject.hello()         // No need to create object.  
+    }  
+}  
+  
+  
+object SingletonObject{  
+    def hello(){  
+        println("Hello, This is Singleton Object")  
+    }  
+}  
+
+========================================
+case class CaseClass(a:Int, b:Int)  
+  
+object MainObject{  
+    def main(args:Array[String]){  
+        var c =  CaseClass(10,10)       // Creating object of case class  
+        println("a = "+c.a)               // Accessing elements of case class  
+        println("b = "+c.b)  
+    }  
+}  
+
+
+=======================================
+primary constructer 
+=======================
+class Student(id:Int, name:String){  
+    def showDetails(){  
+        println(id+" "+name);  
+    }  
+}  
+  
+object MainObject{  
+    def main(args:Array[String]){  
+        var s = new Student(101,"Rama");  
+        s.showDetails()  
+    }  
+}  
+
+=============================
+
+Scala Secondary Constructor Example
+======================================
+
+
+class Student(id:Int, name:String){  
+    var age:Int = 0  
+    def showDetails(){  
+        println(id+" "+name+" "+age)  
+    }  
+    def this(id:Int, name:String,age:Int){  
+        this(id,name)       // Calling primary constructor, and it is first line  
+        this.age = age  
+    }  
+}  
+  
+object MainObject{  
+    def main(args:Array[String]){  
+        var s = new Student(101,"Rama",20);  
+        s.showDetails()  
+    }  
+}  
+
+======================================
+
+Scala Example: Constructor Overloading
+
+In scala, you can overload constructor. Let's see an example.
+
+class Student(id:Int){  
+    def this(id:Int, name:String)={  
+        this(id)  
+        println(id+" "+name)  
+    }  
+    println(id)  
+}  
+  
+object MainObject{  
+    def main(args:Array[String]){  
+        new Student(101)  
+        new Student(100,"India")  
+    }  
+}  
+
+=================================
+
+Scala Method Overloading
+
+Scala provides method overloading feature which allows us to define methods of same name but having different parameters or data types. It helps to optimize code.
+
+Scala Method Overloading Example by using Different Parameters
+
+In the following example, we have define two add methods with different number of parameters but having same data type.
+
+class Arithmetic{  
+    def add(a:Int, b:Int){  
+        var sum = a+b  
+        println(sum)  
+    }  
+    def add(a:Int, b:Int, c:Int){  
+        var sum = a+b+c  
+        println(sum)  
+    }  
+}  
+  
+object MainObject{  
+    def main(args:Array[String]){  
+        var a  = new Arithmetic();  
+        a.add(10,10);  
+        a.add(10,10,10);  
+    }  
+}  
+
+
+
+====================================
+
+Scala Trait
+
+A trait is like an interface with a partial implementation. In scala, trait is a collection of abstract and non-abstract methods. You can create trait that can have all abstract methods or some abstract and some non-abstract methods.
+
+A variable that is declared either by using val or var keyword in a trait get internally implemented in the class that implements the trait. Any variable which is declared by using val or var but not initialized is considered abstract.
+
+Traits are compiled into Java interfaces with corresponding implementation classes that hold any methods implemented in the traits.
+
+Scala Trait Example
+
+trait Printable{  
+    def print()  
+}  
+  
+class A4 extends Printable{  
+    def print(){  
+        println("Hello")  
+    }  
+}  
+  
+object MainObject{  
+    def main(args:Array[String]){  
+        var a = new A4()  
+        a.print()  
+    }  
+}  
+
+
+=================================
+trait Printable{  
+    def print()  
+}  
+  
+trait Showable{  
+   def show()  
+}  
+  
+class A6 extends Printable with Showable{  
+    def print(){  
+        println("This is printable")  
+    }  
+    def show(){  
+        println("This is showable");  
+    }  
+}  
+  
+object MainObject{  
+    def main(args:Array[String]){  
+        var a = new A6()  
+        a.print()  
+        a.show()  
+    }  
+}  
+
+===============================================
+
+trait Printable{  
+    def print()         // Abstract method  
+    def show(){         // Non-abstract method  
+        println("This is show method")  
+    }  
+}  
+  
+class A6 extends Printable{  
+    def print(){  
+        println("This is print method")  
+    }  
+}  
+  
+object MainObject{  
+    def main(args:Array[String]){  
+        var a = new A6()  
+        a.print()  
+        a.show()  
+    }  
+}  
+
+
+==========================================
+
+abstract class Bike{  
+    def run()  
+}  
+  
+class Hero extends Bike{  
+    def run(){  
+        println("running fine...")  
+    }  
+}  
+  
+object MainObject{  
+    def main(args: Array[String]){  
+        var h = new Hero()  
+        h.run()  
+    }  
+}  
+
+
+================================
+method ovverriding
+============================
+
+class Vehicle{  
+    def run(){  
+        println("vehicle is running")  
+    }  
+}  
+  
+class Bike extends Vehicle{  
+     override def run(){  
+        println("Bike is running")  
+    }  
+}  
+  
+object MainObject{  
+    def main(args:Array[String]){  
+        var b = new Bike()  
+        b.run()  
+    }  
+} 
+
+
+
+
+
