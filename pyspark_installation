@@ -1,0 +1,187 @@
+admin1@admin1-Latitude-3400:~$ conda activate
+(base) admin1@admin1-Latitude-3400:~$ conda install openjdk
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /home/admin1/anaconda3
+
+  added / updated specs:
+    - openjdk
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    conda-4.12.0               |   py37h06a4308_0        14.5 MB
+    openjdk-8.0.152            |       h7b6447c_3        57.4 MB
+    ------------------------------------------------------------
+                                           Total:        71.8 MB
+
+The following NEW packages will be INSTALLED:
+
+  openjdk            pkgs/main/linux-64::openjdk-8.0.152-h7b6447c_3
+
+The following packages will be UPDATED:
+
+  conda                               4.10.0-py37h06a4308_0 --> 4.12.0-py37h06a4308_0
+
+
+Proceed ([y]/n)? y
+
+
+Downloading and Extracting Packages
+conda-4.12.0         | 14.5 MB   | ##################################### | 100% 
+openjdk-8.0.152      | 57.4 MB   | ##################################### | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+(base) admin1@admin1-Latitude-3400:~$ conda install pyspark
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /home/admin1/anaconda3
+
+  added / updated specs:
+    - pyspark
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    py4j-0.10.7                |           py37_0         241 KB
+    pyspark-2.4.0              |           py37_0       195.3 MB
+    ------------------------------------------------------------
+                                           Total:       195.6 MB
+
+The following NEW packages will be INSTALLED:
+
+  py4j               pkgs/main/linux-64::py4j-0.10.7-py37_0
+  pyspark            pkgs/main/linux-64::pyspark-2.4.0-py37_0
+
+
+Proceed ([y]/n)? y
+
+
+Downloading and Extracting Packages
+pyspark-2.4.0        | 195.3 MB  | #####6                                |  15% ^C
+py4j-0.10.7          | 241 KB    | ################################################################################################### | 100% 
+
+CondaSignalInterrupt: Signal interrupt SIGINT
+
+(base) admin1@admin1-Latitude-3400:~$ conda install pyspark
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /home/admin1/anaconda3
+
+  added / updated specs:
+    - pyspark
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    pyspark-2.4.0              |           py37_0       195.3 MB
+    ------------------------------------------------------------
+                                           Total:       195.3 MB
+
+The following NEW packages will be INSTALLED:
+
+  py4j               pkgs/main/linux-64::py4j-0.10.7-py37_0
+  pyspark            pkgs/main/linux-64::pyspark-2.4.0-py37_0
+
+
+Proceed ([y]/n)? y
+
+
+Downloading and Extracting Packages
+pyspark-2.4.0        | 195.3 MB  | ################################################################################################### | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+(base) admin1@admin1-Latitude-3400:~$ conda install -c conda-forge findspark
+Collecting package metadata (current_repodata.json): done
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /home/admin1/anaconda3
+
+  added / updated specs:
+    - findspark
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    conda-4.12.0               |   py37h89c1867_0         1.0 MB  conda-forge
+    findspark-2.0.1            |     pyhd8ed1ab_0           8 KB  conda-forge
+    ------------------------------------------------------------
+                                           Total:         1.0 MB
+
+The following NEW packages will be INSTALLED:
+
+  findspark          conda-forge/noarch::findspark-2.0.1-pyhd8ed1ab_0
+
+The following packages will be SUPERSEDED by a higher-priority channel:
+
+  conda              pkgs/main::conda-4.12.0-py37h06a4308_0 --> conda-forge::conda-4.12.0-py37h89c1867_0
+
+
+Proceed ([y]/n)? y
+
+
+Downloading and Extracting Packages
+conda-4.12.0         | 1.0 MB    | ################################################################################################### | 100% 
+findspark-2.0.1      | 8 KB      | ################################################################################################### | 100% 
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+(base) admin1@admin1-Latitude-3400:~$ pyspark
+Python 3.7.6 (default, Jan  8 2020, 19:59:22) 
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+2022-04-23 00:25:43 WARN  Utils:66 - Your hostname, admin1-Latitude-3400 resolves to a loopback address: 127.0.1.1; using 192.168.43.188 instead (on interface wlp0s20f3)
+2022-04-23 00:25:43 WARN  Utils:66 - Set SPARK_LOCAL_IP if you need to bind to another address
+2022-04-23 00:25:43 WARN  NativeCodeLoader:62 - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+2022-04-23 00:25:45 WARN  Utils:66 - Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+2022-04-23 00:25:45 WARN  Utils:66 - Service 'SparkUI' could not bind on port 4041. Attempting port 4042.
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /__ / .__/\_,_/_/ /_/\_\   version 2.4.0
+      /_/
+
+Using Python version 3.7.6 (default, Jan  8 2020 19:59:22)
+SparkSession available as 'spark'.
+>>> exit()
+(base) admin1@admin1-Latitude-3400:~$ jupyter notebook
+Now run the folllowing command to see the code working in jupyter notebook or not
+from pyspark.sql import SparkSession
+
+#Create SparkSession
+spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+
+# Data
+data = [("Java", "20000"), ("Python", "100000"), ("Scala", "3000")]
+
+# Columns
+columns = ["language","users_count"]
+# Create DataFrame
+df = spark.createDataFrame(data).toDF(*columns)
+
+# Print DataFrame
+df.show()
