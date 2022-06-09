@@ -1,0 +1,75 @@
+# pip install pyspark 
+# or
+# conda install pyspark if using anaconda distribution
+import pyspark
+from pyspark.sql import SparkSession
+import pandas as pd
+=========================================================================================================================================================
+spark = SparkSession.builder.appName("Introduction to Spark").getOrCreate()
+spark
+=========================================================================================================================================================
+df_pyspark = spark.read.csv("tips.csv")
+df_pyspark
+df_pyspark.show(5)
+df_pyspark.printSchema()
+df_pyspark = spark.read.csv("tips.csv", header = True, inferSchema = True)
+df_pyspark.show(5)
+df_pyspark.printSchema()
+type(df_pyspark)
+df_pyspark.columns
+df_pyspark.head(3)
+df_pyspark.select("sex").show(5)
+df_pyspark.select(["tip", "sex"]).show(5)
+df_pyspark.select(df_pyspark[1], df_pyspark[2]).show(5)
+df_pyspark.describe().show()
+df_pyspark = df_pyspark.withColumn("tip_bill_ratio", (df_pyspark["tip"]/df_pyspark["total_bill"])*100)
+df_pyspark.show(5)
+df_pyspark = df_pyspark.drop("tip_bill_ratio")
+df_pyspark.show(5)
+df_pyspark.withColumnRenamed("sex", "gender").show(5)
+df_pyspark.withColumnRenamed("sex", "gender").withColumnRenamed("time", "event").show(5)
+df_pyspark = spark.read.csv("tips_missing.csv", header = True, inferSchema = True)
+df_pyspark.show(20)
+df_pyspark.na.drop().show()
+### how == any
+df_pyspark.na.drop(how = "any").show()
+### how == all
+df_pyspark.na.drop(how = "all").show()
+The .drop( ) method also contains a threshold argument. This argument indicates that how many non-null values should be there in an observation (i.e., in a
+row) to keep it.
+==========================================================================================================================================================
+df_pyspark.na.drop(how = "any", thresh = 2).show()
+==========================================================================================================================================================
+The subset argument inside the .drop( ) method helps in dropping entire observations [i.e., rows] based on null values in columns. For a particular column 
+where null value is present, it will delete the entire observation/row.
+df_pyspark.na.drop(how = "any", subset = ["tip"]).show()
+=========================================================================================================================================================
+Dealing with missing values is easy in PySpark. Let’s say we want to fill the null values with string “Missing”. We can do that by using .na.fill(“Missing”)
+notation. This going to fill only the null values of columns with string type.
+### Replaces string column values
+df_pyspark.na.fill("Missing").show()
+==========================================================================================================================================================
+### Replaces numeric column values
+df_pyspark.na.fill(3).show()
+==========================================================================================================================================================
+df_pyspark.na.fill("Missing", ["sex", "day"]).show()
+# Find tips less than or equal to 2
+df_pyspark.filter("tip <= 2").show(5)
+df_pyspark.filter("tip <= 2").select(["total_bill", "tip"]).show(5)
+### Two filtering conditions
+df_pyspark.filter((df_pyspark["tip"] <= 1) | (df_pyspark["tip"] >= 5)).select(["total_bill", "tip"]).show(5)
+### Not operation
+df_pyspark.filter(~(df_pyspark["tip"] <= 2)).select(["total_bill", "tip"]).show(5)
+## Groupby sex and performing sum
+df_pyspark.groupBy("sex").sum().show()
+### Group by day, max tip
+df_pyspark.groupBy("day").max().select(["day", "max(tip)"]).show()
+df_pyspark.groupBy("day").count().show()
+df_pyspark.agg({"tip": "sum"}).show()
+df_pyspark.groupBy("sex").agg({"tip": "sum", "total_bill": "max"}).show()
+spark.stop()
+=========================================================================================================================================================
+java -version
+java version "1.8.0_281"
+pip install pyspark
+=========================================================================================================================================================
