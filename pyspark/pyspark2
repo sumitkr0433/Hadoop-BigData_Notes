@@ -1,0 +1,78 @@
+!apt-get install openjdk-8-jdk-headless -qq > /dev/null
+!wget -q https://www-us.apache.org/dist/spark/spark-3.0.3/spark-3.0.3-bin-hadoop2.7.tgz
+!tar xf spark-3.0.3-bin-hadoop2.7.tgz
+!pip install -q findspark
+import os
+os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-8-openjdk-amd64"
+os.environ["SPARK_HOME"] = "/content/spark-3.0.3-bin-hadoop2.7"
+import findspark
+findspark.init()
+=========================================================================================================================================================
+!pip install pyspark
+from pyspark.sql import SparkSession
+# Create the Session
+spark = SparkSession.builder.master("local").appName("PySpark Tutorial").getOrCreate()
+=========================================================================================================================================================
+sc = spark.sparkContext
+rdd = sc.textFile('../input/stockmarketdatafrom1996to2020/Data/Data/FB/FB.csv')
+rdd.take(2)
+=========================================================================================================================================================
+stock_1 = spark.read.csv('../input/stockmarketdatafrom1996to2020/Data/Data/AAPL/AAPL.csv',inferSchema=True, header=True)
+stock_1.show(5)
+=========================================================================================================================================================
+from pathlib import Path
+contents = list(Path('../input/stockmarketdatafrom1996to2020/Data/Data').iterdir())
+print(contents)
+=========================================================================================================================================================
+stock_2 = spark.read.csv('../input/stockmarketdatafrom1996to2020/Data/Data/MSFT/MSFT.csv',inferSchema=True, header=True)
+from pathlib import Path
+contents = list(Path('../input/stockmarketdatafrom1996to2020/Data/Data').iterdir())
+print(contents)
+=========================================================================================================================================================
+stock_2 = spark.read.csv('../input/stockmarketdatafrom1996to2020/Data/Data/MSFT/MSFT.csv',inferSchema=True, header=True)
+stock_1.printSchema()
+stock_1.select("Close").show(10)
+==========================================================================================================================================================
+from pyspark.sql import functions as F
+stock_1.filter(F.col("Close")>148.00).select("Date","Close").show(10)
+=========================================================================================================================================================
+rdd = rdd.map(lambda line: line.split(","))
+rdd.top(5)
+========================================================================================================================================================
+num = sc.parallelize([23, 1, 4, 5, 6, 7])
+num_sum = num.reduce(lambda a,b:a+b)
+print(num_sum)
+=========================================================================================================================================================
+from pyspark.sql import Row
+header = rdd.first()
+stock_3 = rdd.filter(lambda line: line != header).map(lambda line: Row(date=line[0],open=line[1],high=line[2],low=line[3],close=line[4],adj_close=line[5],
+                                   volume=line[6])).toDF()
+stock_3.show(5)
+==========================================================================================================================================================
+from pyspark.ml.feature import StandardScaler
+from pyspark.ml.feature import VectorAssembler
+input_1 = stock_1.select("Adj Close")
+input_1.show(5)
+input_2 = stock_2.select("Adj Close")
+#######################
+input_1 = input_1.withColumnRenamed("Adj Close","label")
+input_2 = input_2.withColumnRenamed("Adj Close","feature")
+input_data = input_1.join(input_2)
+input_data.show(5)
+========================================================================================================================================================
+assembler = VectorAssembler(inputCols=["feature"],outputCol="features")
+input_data = assembler.transform(input_data)
+standardScaler = StandardScaler(inputCol="features", outputCol="features_scaled")
+scaler = standardScaler.fit(input_data.select("features"))
+df = scaler.transform(input_data)
+df.show(5)
+========================================================================================================================================================
+# Predict test_data
+predicted = model.transform(test_data)
+# Take predictions and the true label - zip them
+predictions = predicted.select("prediction").rdd.map(lambda x: x[0])
+labels = predicted.select("label").rdd.map(lambda x: x[0])
+pred_lab = predictions.zip(labels).collect()
+# Print out first 5  predictions
+pred_lab[:5]
+=========================================================================================================================================================
