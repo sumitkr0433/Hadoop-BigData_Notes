@@ -1,0 +1,165 @@
+Listing 2.1 Launching pyspark on a local machine
+=========================================================================================================================================================
+$ pyspark
+Python 3.7.3 (default, Mar 27 2019, 16:54:48)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 7.4.0 -- An enhanced Interactive Python. Type '?' for help.
+19/09/07 12:16:47 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+Welcome to
+____
+__
+/ __/__ ___ _____/ /__
+_\ \/ _ \/ _ `/ __/ '_/
+/__ / .__/\_,_/_/ /_/\_\
+version 2.4.3
+/_/
+Using Python version 3.7.3 (default, Mar 27 2019 16:54:48)
+SparkSession available as 'spark'.
+In [1]:
+=========================================================================================================================================================
+$ spark.sparkContext
+# <SparkContext master=local[*] appName=PySparkShell>
+=========================================================================================================================================================
+sc = spark.sparkContext
+sqlContext = spark
+=========================================================================================================================================================
+Listing 2.2 Deciding on how chatty you want PySpark to be.
+spark.sparkContext.setLogLevel(KEYWORD)
+=========================================================================================================================================================
+Table 2.1 m log level keywords
+
+========================================================================================================================================================
+Listing 2.3 The DataFrameReader object
+In [3]: spark.read
+Out[3]: <pyspark.sql.readwriter.DataFrameReader at 0x115be1b00>
+In [4]: dir(spark.read)
+Out[4]: [<some content removed>, _spark', 'csv', 'format', 'jdbc', 'json','load', 'option', 'options', 'orc', 'parquet', 'schema', 'table', 'text']
+=========================================================================================================================================================
+Listing 2.4 "Reading" our Jane Austen novel in record time
+book = spark.read.text("./data/Ch02/1342-0.txt")
+book
+# DataFrame[value: string]
+==========================================================================================================================================================
+Listing 2.5 Printing the schema of our data frame
+book.printSchema()
+# root
+# |-- value: string (nullable = true)
+==========================================================================================================================================================
+Listing 2.6 Using PySpark’s documentation directly in the REPL
+In [*]: print(spark.read.__doc__)
+Interface used to load a :class:`DataFrame` from external storage systems (e.g. file systems, key-value stores, etc). Use :func:`spark.read`
+to access this. .. versionadded:: 1.4
+In [*]: spark.read?
+Type:
+property
+String form: <property object at 0x1159a0958>
+Docstring:
+Returns a :class:`DataFrameReader` that can be used to read data
+in as a :class:`DataFrame`.
+:return: :class:`DataFrameReader`
+.. versionadded:: 2.0
+==========================================================================================================================================================
+Listing 2.7 Showing a little data using the .show() method.
+book.show()
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
++--------------------+
+|
+value|
++--------------------+
+|The Project Guten...|
+|
+|
+|This eBook is for...|
+|almost no restric...|
+|re-use it under t...|
+|with this eBook o...|
+|
+|
+|
+|
+|Title: Pride and ...|
+|
+|
+| Author: Jane Austen|
+|
+|
+|Posting Date: Aug...|
+|Release Date: Jun...|
+|Last Updated: Mar...|
+|
+|
+|
+Language: English|
+|
+|
+|Character set enc...|
+|
+|
++--------------------+
+only showing top 20 rows
+========================================================================================================================================================
+book.show(10, truncate=50)
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
++--------------------------------------------------+
+|
+value|
++--------------------------------------------------+
+|The Project Gutenberg EBook of Pride and Prejud...|
+|
+|
+|This eBook is for the use of anyone anywhere at...|
+|almost no restrictions whatsoever. You may cop...|
+|re-use it under the terms of the Project Gutenb...|
+|
+with this eBook or online at www.gutenberg.org|
+|
+|
+|
+|
+|
+Title: Pride and Prejudice|
+|
+|
++--------------------------------------------------+
+only showing top 10 rows
